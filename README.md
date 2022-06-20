@@ -39,7 +39,7 @@ curl -L https://istio.io/downloadIstio | sh -
 cd istio-1.14.1
 export PATH=$PWD/bin:$PATH
 istioctl x precheck
-istioctl install --set profile=default -y
+istioctl install --set profile=minimal
 istioctl analyze
 ```
 
