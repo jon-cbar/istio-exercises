@@ -139,6 +139,12 @@ Now, test no mTLS traffic.
 ~/scripts/traffic-simulator.sh -o nosidecar -d permissive
 ```
 
+### 4. HTTP Traffic Access Control
+
+```sh
+kubectl apply -n strict -f deployments/allow-nothing.yaml
+```
+
 ## References
 
 - https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/
