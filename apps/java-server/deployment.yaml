@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: java-server
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-server
+  labels:
+    app: java-server
+    service: java-server
+spec:
+  selector:
+    app: java-server
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-server
+  template:
+    metadata:
+      labels:
+        app: java-server
+    spec:
+      serviceAccountName: java-server
+      containers:
+      - name: java-server
+        image: java-server:latest
+        imagePullPolicy: Never
+

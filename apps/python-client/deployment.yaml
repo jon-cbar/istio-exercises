@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: python-client
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-client
+  labels:
+    app: python-client
+    service: python-client
+spec:
+  selector:
+    app: python-client
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-client
+  template:
+    metadata:
+      labels:
+        app: python-client
+    spec:
+      serviceAccountName: python-client
+      containers:
+      - name: python-client
+        image: python-client:latest
+        imagePullPolicy: Never
+
