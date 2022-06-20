@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: PeerAuthentication
+metadata:
+  name: "default"
+spec:
+  mtls:
+    mode: STRICT
