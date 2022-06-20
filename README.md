@@ -104,6 +104,10 @@ kubectl apply -f <(istioctl kube-inject -f ~/apps/python-client/deployment.yaml)
 kubectl create ns nosidecar
 kubectl apply -f ~/apps/python-client/deployment.yaml -n nosidecar
 
+kubectl get pods -n permissive
+kubectl get pods -n strict
+kubectl get pods -n nosidecar
+
 for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict"; do kubectl exec "$(kubectl get pod -l app=python-client -n ${from} -o jsonpath={.items..metadata.name})" -c python-client -n ${from} -- curl http://java-server.${to}:8080 -s -o /dev/null -w "python-client.${from} to java-server.${to}: %{http_code}\n"; done; done
 ```
 

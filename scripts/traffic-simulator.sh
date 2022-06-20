@@ -25,4 +25,4 @@ clientApp="python-client"
 serverApp="java-server"
 serverPort="8080"
 
-kubectl exec "$(kubectl get pod -l app=${clientApp} -n ${origin} -o jsonpath={.items..metadata.name})" -c ${clientApp} -n ${origin} -- curl http://${serverApp}.${destination}:${serverApp} -s -o /dev/null -w "${clientApp}.${origin} to ${serverApp}.${destination}: %{http_code}\n"
+minikube kubectl -- exec "$(minikube kubectl -- get pod -l app=${clientApp} -n ${origin} -o jsonpath={.items..metadata.name})" -c ${clientApp} -n ${origin} -- curl http://${serverApp}.${destination}:${serverPort} -s -o /dev/null -w "${clientApp}.${origin} to ${serverApp}.${destination}: %{http_code}\n"

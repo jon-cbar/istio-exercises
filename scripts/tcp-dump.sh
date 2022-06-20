@@ -21,4 +21,4 @@ if [ -z "$namespace" ] || [ -z "$app" ] || [ -z "$port" ]
     helpFunction
 fi
 
-kubectl exec -n "$namespace" "$(kubectl get pod -n "$namespace" -l app="$app" -o jsonpath={.items..metadata.name})" -c istio-proxy -- sudo tcpdump dst port "$port" -A
+minikube kubectl -- exec -n "$namespace" "$(minikube kubectl -- get pod -n "$namespace" -l app="$app" -o jsonpath={.items..metadata.name})" -c istio-proxy -- sudo tcpdump dst port "$port" -A
