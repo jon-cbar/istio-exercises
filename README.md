@@ -40,6 +40,7 @@ cd istio-1.14.1
 export PATH=$PWD/bin:$PATH
 istioctl x precheck
 istioctl install --set profile=minimal
+kubectl label namespace default istio-injection=disabled
 istioctl analyze
 ```
 
