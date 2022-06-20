@@ -50,9 +50,28 @@ kubectl get peerauthentication --all-namespaces
 kubectl get destinationrule --all-namespaces
 ```
 
+### Build, Try and Dockerize Applications
+
+#### Python Client
+
+```sh
+cd ~/apps/python-client
+python3 main.py
+docker build -f apps/python-client/Dockerfile -t python-client:latest .
+```
+
+#### Java Server
+
+```sh
+cd ~/apps/java-server
+sudo apt-get install openjdk-17-jdk
+./apps/java-server/mvnw spring-boot:run
+docker build -f apps/java-server/Dockerfile -t java-server:latest .
+```
+
 ### Create Docker Images
 
 ```sh
-docker build -f apps/python-client/Dockerfile -t python-client:latest .
-docker build -f apps/java-server/Dockerfile -t java-server:latest .
+
+
 ```
