@@ -59,6 +59,7 @@ cd ~/apps/python-client
 sudo apt install python3-pip
 pip install -r requirements.txt
 python3 main.py
+curl http://localhost:5000
 docker build -f Dockerfile -t python-client:latest .
 ```
 
@@ -68,6 +69,7 @@ docker build -f Dockerfile -t python-client:latest .
 cd ~/apps/java-server
 sudo apt-get install openjdk-17-jdk
 ./mvnw spring-boot:package
+curl http://localhost:8080
 docker build -f Dockerfile -t java-server:latest .
 ```
 
