@@ -56,6 +56,7 @@ kubectl get destinationrule --all-namespaces
 
 ```sh
 cd ~/apps/python-client
+sudo apt install python3-pip
 pip install -r requirements.txt
 python3 main.py
 docker build -f apps/python-client/Dockerfile -t python-client:latest .
