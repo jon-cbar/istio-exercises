@@ -39,7 +39,7 @@ curl -L https://istio.io/downloadIstio | sh -
 cd istio-1.14.1
 export PATH=$PWD/bin:$PATH
 istioctl x precheck
-istioctl install --set profile=minimal
+istioctl install --set profile=minimal --set values.global.proxy.privileged=true
 kubectl label namespace default istio-injection=disabled
 istioctl analyze
 ```
