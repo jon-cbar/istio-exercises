@@ -31,3 +31,13 @@ alias kubectl="minikube kubectl --"
 eval $(minikube docker-env)
 kubectl get pods
 ```
+
+### Install Istio
+
+```sh
+curl -L https://istio.io/downloadIstio | sh -
+cd istio-1.14.1
+export PATH=$PWD/bin:$PATH
+istioctl install --set profile=default -y
+istioctl analyze
+```
