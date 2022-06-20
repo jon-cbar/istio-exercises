@@ -85,7 +85,7 @@ Namespaces:
 - Strict: workloads only accept mutual TLS traffic.
 - No Sidecar: client app without proxy, i.e no mTLS.
 
-## Initial Scenario
+### 1. Initial Scenario
 
 ![Initial Scenario](initial-scenario.png)
 
@@ -104,6 +104,12 @@ kubectl create ns nosidecar
 kubectl apply -f python-client/deployment.yaml -n nosidecar
 
 for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict"; do kubectl exec "$(kubectl get pod -l app=python-client -n ${from} -o jsonpath={.items..metadata.name})" -c python-client -n ${from} -- curl http://java-server.${to}:8080 -s -o /dev/null -w "python-client.${from} to java-server.${to}: %{http_code}\n"; done; done
+```
+
+### 2. Mutual TLS Lock Down
+
+```sh
+kubectl apply -n strict -f deployments/mtls-lock-down.yaml
 ```
 
 ## References
