@@ -94,15 +94,15 @@ All namespaces configured as default authentication mode (Permissive)
 
 ```sh
 kubectl create ns permissive
-kubectl apply -f <(istioctl kube-inject -f java-server/deployment.yaml) -n permissive
-kubectl apply -f <(istioctl kube-inject -f python-client/deployment.yaml) -n permissive
+kubectl apply -f <(istioctl kube-inject -f ~/apps/java-server/deployment.yaml) -n permissive
+kubectl apply -f <(istioctl kube-inject -f ~/apps/python-client/deployment.yaml) -n permissive
 
 kubectl create ns strict
-kubectl apply -f <(istioctl kube-inject -f java-server/deployment.yaml) -n strict
-kubectl apply -f <(istioctl kube-inject -f python-client/deployment.yaml) -n strict
+kubectl apply -f <(istioctl kube-inject -f ~/apps/java-server/deployment.yaml) -n strict
+kubectl apply -f <(istioctl kube-inject -f ~/apps/python-client/deployment.yaml) -n strict
 
 kubectl create ns nosidecar
-kubectl apply -f python-client/deployment.yaml -n nosidecar
+kubectl apply -f ~/apps/python-client/deployment.yaml -n nosidecar
 
 for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict"; do kubectl exec "$(kubectl get pod -l app=python-client -n ${from} -o jsonpath={.items..metadata.name})" -c python-client -n ${from} -- curl http://java-server.${to}:8080 -s -o /dev/null -w "python-client.${from} to java-server.${to}: %{http_code}\n"; done; done
 ```
