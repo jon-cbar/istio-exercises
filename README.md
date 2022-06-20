@@ -59,7 +59,7 @@ cd ~/apps/python-client
 sudo apt install python3-pip
 pip install -r requirements.txt
 python3 main.py
-docker build -f apps/python-client/Dockerfile -t python-client:latest .
+docker build -f Dockerfile -t python-client:latest .
 ```
 
 #### Java Server
@@ -68,7 +68,7 @@ docker build -f apps/python-client/Dockerfile -t python-client:latest .
 cd ~/apps/java-server
 sudo apt-get install openjdk-17-jdk
 ./apps/java-server/mvnw spring-boot:package
-docker build -f apps/java-server/Dockerfile -t java-server:latest .
+docker build -f Dockerfile -t java-server:latest .
 ```
 
 ### Create Docker Images
