@@ -68,7 +68,8 @@ docker build -f Dockerfile -t python-client:latest .
 ```sh
 cd ~/apps/java-server
 sudo apt-get install openjdk-17-jdk
-./mvnw spring-boot:package
+./mvnw spring-boot:build-image
+java -jar target/java-server-latest.jar
 curl http://localhost:8080
 docker build -f Dockerfile -t java-server:latest .
 ```
