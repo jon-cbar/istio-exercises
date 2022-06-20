@@ -41,3 +41,17 @@ export PATH=$PWD/bin:$PATH
 istioctl install --set profile=default -y
 istioctl analyze
 ```
+
+### Check Authentication Policies
+
+```sh
+kubectl get peerauthentication --all-namespaces
+kubectl get destinationrule --all-namespaces
+```sh
+
+### Create Docker Images
+
+```sh
+docker build -f apps/python-client/Dockerfile -t python-client:latest .
+docker build -f apps/java-server/Dockerfile -t java-server:latest .
+```
