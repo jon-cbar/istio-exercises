@@ -119,10 +119,24 @@ kubectl apply -n strict -f deployments/mtls-lock-down.yaml
 for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict"; do kubectl exec "$(kubectl get pod -l app=python-client -n ${from} -o jsonpath={.items..metadata.name})" -c python-client -n ${from} -- curl http://java-server.${to}:8080 -s -o /dev/null -w "python-client.${from} to java-server.${to}: %{http_code}\n"; done; done
 ```
 
-### 3. See Encrypted Traffic
+### 3. See Encrypted and Plain Text Traffic
+
+Start monitoring the traffic.
 
 ```sh
-kubectl exec -n permissive "$(kubectl get pod -n permissive -l app=java-server -o jsonpath={.items..metadata.name})" -c istio-proxy -- sudo tcpdump dst port 8080 -A
+~/scripts/tcp-dump.sh -n permissive -a java-server -p 8080
+```
+
+Test mTLS traffic, in another terminal session.
+
+```sh
+~/scripts/traffic-simulator.sh -o strict -d permissive
+```
+
+Now, test no mTLS traffic.
+
+```sh
+~/scripts/traffic-simulator.sh -o nosidecar -d permissive
 ```
 
 ## References
