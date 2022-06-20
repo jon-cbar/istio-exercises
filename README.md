@@ -87,6 +87,8 @@ Namespaces:
 
 ## Initial Scenario
 
+![Initial Scenario](initial-scenario.png)
+
 All namespaces configured as default authentication mode (Permissive)
 
 ```sh
