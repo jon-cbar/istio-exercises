@@ -81,13 +81,13 @@ Workloads:
 - Python Clients, with and without sidecar;
 
 Namespaces:
-- permissive
-- strict
-- nosidecar
+- Permissive: workloads accept both mutual TLS and plain text traffic.
+- Strict: workloads only accept mutual TLS traffic.
+- No Sidecar: client app without proxy, i.e no mTLS.
 
 ## Initial Scenario
 
-All namespaces configured as default authentication mode (Permissive).
+All namespaces configured as default authentication mode (Permissive)
 
 ```sh
 kubectl create ns permissive
