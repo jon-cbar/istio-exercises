@@ -67,7 +67,7 @@ docker build -f Dockerfile -t python-client:latest .
 ```sh
 cd ~/apps/java-server
 sudo apt-get install openjdk-17-jdk
-./apps/java-server/mvnw spring-boot:package
+./mvnw spring-boot:package
 docker build -f Dockerfile -t java-server:latest .
 ```
 
