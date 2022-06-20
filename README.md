@@ -47,7 +47,7 @@ istioctl analyze
 ```sh
 kubectl get peerauthentication --all-namespaces
 kubectl get destinationrule --all-namespaces
-```sh
+```
 
 ### Create Docker Images
 
