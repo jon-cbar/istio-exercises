@@ -74,9 +74,28 @@ curl http://localhost:8080
 docker build -f Dockerfile -t java-server:latest .
 ```
 
-### Create Docker Images
+## Hands On
+
+Workloads:
+- Java Servers, with sidecar;
+- Python Clients, with and without sidecar;
+
+Namespaces:
+- permissive
+- strict
+- nosidecar
+
+## Initial Scenario
+
+All namespaces configured as default authentication mode (Permissive).
 
 ```sh
-
-
+kubectl create ns permissive
+kubectl apply -f <(istioctl kube-inject -f java-server/deployment.yaml) -n permissive
+kubectl apply -f <(istioctl kube-inject -f python-client/deployment.yaml) -n permissive
+kubectl create ns strict
+kubectl apply -f <(istioctl kube-inject -f java-server/deployment.yaml) -n strict
+kubectl apply -f <(istioctl kube-inject -f python-client/deployment.yaml) -n strict
+kubectl create ns nosidecar
+kubectl apply -f python-client/deployment.yaml -n nosidecar
 ```
