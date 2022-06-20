@@ -5,7 +5,7 @@
 You need configure the environment.
 Here, I show how to do it on Ubuntu.
 
-### Docker
+### Install Docker
 
 ```sh
 sudo apt-get update
@@ -19,3 +19,15 @@ sudo usermod -aG docker $USER && newgrp docker
 sudo docker run hello-world
 ```
 
+### Install Minikube
+
+```sh
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube config set driver docker
+minikube delete
+minikube start
+alias kubectl="minikube kubectl --"
+eval $(minikube docker-env)
+kubectl get pods
+```
