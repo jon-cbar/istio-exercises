@@ -118,7 +118,7 @@ for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict
 ### 3. See Encrypted Traffic
 
 ```sh
-$ kubectl exec -nfoo "$(kubectl get pod -nfoo -lapp=httpbin -ojsonpath={.items..metadata.name})" -c istio-proxy -- sudo tcpdump dst port 80  -A
+kubectl exec -n permissive "$(kubectl get pod -n permissive -l app=java-server -o jsonpath={.items..metadata.name})" -c istio-proxy -- sudo tcpdump dst port 8080 -A
 ```
 
 ## References
