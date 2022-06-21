@@ -124,7 +124,7 @@ for from in "permissive" "strict" "nosidecar"; do for to in "permissive" "strict
 Start monitoring the traffic.
 
 ```sh
-~/scripts/tcp-dump.sh -n permissive -a java-server -p 8080
+~/scripts/monitor.sh -n permissive -a java-server -p 8080
 ```
 
 Test mTLS traffic, in another terminal session.
@@ -142,11 +142,18 @@ Now, test no mTLS traffic.
 ### 4. HTTP Traffic Access Control
 
 ```sh
-~/scripts/traffic-simulator.sh -o strict -d permissive
-kubectl apply -n permissive -f ~/deployments/allow-nothing.yaml
-~/scripts/traffic-simulator.sh -o strict -d permissive
+~/scripts/traffic-simulator.sh -o permissive -d strict
+~/scripts/no-allowed-traffic.sh -o permissive -d strict
+
+kubectl apply -n strict -f ~/deployments/allow-nothing.yaml
+~/scripts/traffic-simulator.sh -o permissive -d strict
+
 kubectl apply -n permissive -f ~/deployments/allow-something.yaml
+~/scripts/traffic-simulator.sh -o permissive -d strict
+~/scripts/no-allowed-traffic.sh -o permissive -d strict
+
 ~/scripts/traffic-simulator.sh -o strict -d permissive
+~/scripts/no-allowed-traffic.sh -o strict -d permissive
 ```
 
 ## References
