@@ -130,34 +130,40 @@ Start monitoring the traffic.
 Test mTLS traffic, in another terminal session.
 
 ```sh
-~/scripts/traffic-simulator.sh -o strict -d permissive
+~/scripts/do-get.sh -o strict -d permissive
 ```
 
 Now, test no mTLS traffic.
 
 ```sh
-~/scripts/traffic-simulator.sh -o nosidecar -d permissive
+~/scripts/do-get.sh -o nosidecar -d permissive
 ```
 
 ### 4. HTTP Traffic Access Control
 
 ```sh
-~/scripts/traffic-simulator.sh -o strict -d permissive
+~/scripts/do-get.sh -o strict -d permissive
 ~/scripts/do-post.sh -o strict -d permissive
 
 kubectl apply -n permissive -f ~/configs/allow-nothing.yaml
-~/scripts/traffic-simulator.sh -o strict -d permissive
+
+~/scripts/do-get.sh -o strict -d permissive
 ~/scripts/do-post.sh -o strict -d permissive
 
 kubectl apply -n permissive -f ~/configs/allow-something.yaml
-~/scripts/traffic-simulator.sh -o strict -d permissive
+
+~/scripts/do-get.sh -o strict -d permissive
 ~/scripts/do-post.sh -o strict -d permissive
 
 kubectl apply -n permissive -f ~/configs/allow-more.yaml
-~/scripts/traffic-simulator.sh -o strict -d permissive
+
+~/scripts/do-get.sh -o strict -d permissive
 ~/scripts/do-post.sh -o strict -d permissive
 
 kubectl delete authorizationpolicy allow-more -n permissive
+
+~/scripts/do-get.sh -o strict -d permissive
+~/scripts/do-post.sh -o strict -d permissive
 ```
 
 ## References
