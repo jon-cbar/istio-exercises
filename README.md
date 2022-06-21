@@ -145,10 +145,10 @@ Now, test no mTLS traffic.
 ~/scripts/traffic-simulator.sh -o permissive -d strict
 ~/scripts/not-allowed-traffic.sh -o permissive -d strict
 
-kubectl apply -n strict -f ~/deployments/allow-nothing.yaml
+kubectl apply -n strict -f ~/configs/allow-nothing.yaml
 ~/scripts/traffic-simulator.sh -o permissive -d strict
 
-kubectl apply -n permissive -f ~/deployments/allow-something.yaml
+kubectl apply -n permissive -f ~/configs/allow-something.yaml
 ~/scripts/traffic-simulator.sh -o permissive -d strict
 ~/scripts/not-allowed-traffic.sh -o permissive -d strict
 
