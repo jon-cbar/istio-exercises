@@ -142,7 +142,11 @@ Now, test no mTLS traffic.
 ### 4. HTTP Traffic Access Control
 
 ```sh
+~/scripts/traffic-simulator.sh -o strict -d permissive
 kubectl apply -n permissive -f ~/deployments/allow-nothing.yaml
+~/scripts/traffic-simulator.sh -o strict -d permissive
+kubectl apply -n permissive -f ~/deployments/allow-something.yaml
+~/scripts/traffic-simulator.sh -o strict -d permissive
 ```
 
 ## References
