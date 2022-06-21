@@ -156,9 +156,13 @@ kubectl apply -n permissive -f ~/configs/allow-something.yaml
 kubectl apply -n permissive -f ~/configs/allow-more.yaml
 ~/scripts/traffic-simulator.sh -o strict -d permissive
 ~/scripts/do-post.sh -o strict -d permissive
+
+kubectl delete authorizationpolicy allow-more -n permissive
 ```
 
 ## References
 
+- https://istio.io/latest/docs/concepts/security/
 - https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/
-- 
+- https://istio.io/latest/docs/tasks/security/authorization/authz-http/
+- https://minikube.sigs.k8s.io/docs/
